@@ -5,6 +5,10 @@ param
 	[Parameter(Mandatory=$true,HelpMessage="Please enter your PVWA address (For example: https://pvwa.mydomain.com)")]
 	[Alias("url")]
 	[String]$PVWAURL,
+    
+    [Parameter(Mandatory=$true,HelpMessage="PSCredential file for logging into the CyberArk Vault via API")]
+	[Alias("logonCredential")]
+    [System.Management.Automation.PSCredential]$logonCred,
 
     [Parameter(Mandatory=$true,HelpMessage="Folder containing DLLs to be hashed")]
     [String]$dllPath,
