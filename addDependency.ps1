@@ -127,7 +127,7 @@ if ($dependencyType -eq "IIS Application Pool") {
     }
     else {
         try {
-            Install-Module -Name WebAdministration -Force -Scope CurrentUser
+            Import-Module -Name WebAdministration -UseWindowsPowerShell
         }
         catch {
             Exit-WithLogEntry -level ERROR -closeSession $false -msg "Could not install Web Administration Module: $($_.Exception.Message)"
