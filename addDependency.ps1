@@ -1,4 +1,4 @@
-#Requires -RunAsAdministrator
+<##Requires -RunAsAdministrator
 [CmdletBinding(DefaultParametersetName="Create")]
 param
 (
@@ -33,7 +33,19 @@ param
     
     [Parameter(Mandatory=$false,HelpMessage="Location of log file, default is c:\tmp\logs\AddDependency.log")]
     [String]$logfile = "c:\tmp\logs\AddDependency\AddDependency.log"
-)
+)#>
+
+
+$PVWAURL = $octopus_pvwa_uri #base url of priv cloud
+$password = ConvertTo-SecureString $octopus_cybr_api_password -AsPlainText -Force #password of api account
+$logonCred = New-Object System.Management.Automation.PSCredential ($octopus_cybr_api_username, $password)  #username of api account 
+$tgtDependencyName = $octopus_dependency_name  #name of iis app pool
+$serviceAddress = $octopus_target_server #fqdn of machine where app is deployed
+$platformType = "Windows Domain" #leave this alone
+$username = $octopus_svc_username #username of account (not fqdn)
+$address = $octopus_domain_address #domain address of acct 
+$logfile = $octopus_log_location #"c:\tmp\logs\AddDependency\AddDependency.log"
+$dependencyType = $octopus_dependency_type #"Windows Service, IIS Application Pool"
 
 #region Functions
 Function Write-Log {
